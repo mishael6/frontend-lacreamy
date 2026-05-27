@@ -22,7 +22,7 @@ import VerifyOTP from './pages/auth/VerifyOTP';
 import AdminLogin from './pages/auth/AdminLogin';
 
 // Customer Dashboard
-import Dashboard from './pages/dashboard/Dashboard';
+import Dashboard from './pages/Dashboard/Dashboard';
 
 // Admin Panel
 import AdminLayout from './pages/admin/AdminLayout';
