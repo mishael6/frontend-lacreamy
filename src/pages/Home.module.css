@@ -1,0 +1,211 @@
+.features {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 48px 24px;
+}
+
+.featuresInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+}
+
+.feature {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  animation: fadeUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+.featureIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--cream-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brown);
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .featureIcon {
+  background: rgba(242,201,76,0.1);
+  color: var(--yellow);
+}
+
+.feature h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.feature p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.sectionLabel {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.viewAll {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--brown);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-strong);
+  transition: background-color var(--transition), transform var(--transition);
+  white-space: nowrap;
+}
+
+.viewAll:hover {
+  background: var(--bg-overlay);
+  transform: translateX(2px);
+}
+
+[data-theme="dark"] .viewAll {
+  color: var(--yellow);
+  border-color: rgba(242,201,76,0.3);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.ctaBanner {
+  background: linear-gradient(135deg, var(--brown) 0%, var(--brown-dark) 100%);
+  padding: 80px 24px;
+  text-align: center;
+}
+
+[data-theme="dark"] .ctaBanner {
+  background: linear-gradient(135deg, #231208 0%, #1A0D05 100%);
+  border-top: 1px solid rgba(242,201,76,0.15);
+  border-bottom: 1px solid rgba(242,201,76,0.15);
+}
+
+.ctaInner {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.ctaIcon {
+  color: var(--yellow);
+  opacity: 0.8;
+}
+
+.ctaInner h2 {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--cream);
+}
+
+.ctaInner p {
+  font-size: 1rem;
+  color: rgba(253,246,227,0.75);
+  line-height: 1.7;
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  border-radius: var(--radius-full);
+  background: var(--yellow);
+  color: var(--brown-dark);
+  font-weight: 700;
+  font-size: 1rem;
+  transition: background-color var(--transition), transform var(--transition-bounce);
+  margin-top: 8px;
+}
+
+.ctaBtn:hover {
+  background: var(--yellow-light);
+  transform: scale(1.04);
+}
+
+.info {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  padding: 48px 24px;
+}
+
+.infoInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+}
+
+.infoItem {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  color: var(--text-muted);
+}
+
+.infoItem svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--yellow-dark);
+}
+
+.infoItem strong {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.infoItem p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}

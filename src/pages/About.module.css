@@ -1,0 +1,255 @@
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: calc(var(--nav-height) + 60px) 24px 100px;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 80px;
+  animation: fadeUp 0.7s ease both;
+}
+
+.label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.15;
+  margin-bottom: 24px;
+}
+
+.title em {
+  color: var(--brown-light);
+}
+
+[data-theme="dark"] .title em {
+  color: var(--yellow);
+}
+
+.intro {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.story {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 80px;
+  animation: fadeUp 0.7s ease 0.2s both;
+}
+
+.storyText h2 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.storyText p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.storyVisual {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.storyIcon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  color: var(--brown);
+  animation: float ease-in-out infinite;
+  animation-duration: 5s;
+}
+
+[data-theme="dark"] .storyIcon {
+  color: var(--yellow);
+}
+
+.timeline {
+  margin-bottom: 80px;
+  animation: fadeUp 0.7s ease 0.3s both;
+}
+
+.timelineTitle {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 32px;
+}
+
+.milestones {
+  display: flex;
+  flex-direction: column;
+}
+
+.milestone {
+  display: grid;
+  grid-template-columns: 60px 24px 1fr;
+  gap: 0 16px;
+  align-items: start;
+  padding-bottom: 28px;
+  animation: fadeUp 0.5s ease both;
+  position: relative;
+}
+
+.milestone:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 83px;
+  top: 24px;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+
+.year {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--yellow-dark);
+  padding-top: 2px;
+  text-align: right;
+}
+
+[data-theme="dark"] .year {
+  color: var(--yellow);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--brown);
+  border: 2px solid var(--bg-primary);
+  box-shadow: 0 0 0 2px var(--brown);
+  margin-top: 4px;
+  margin-left: 6px;
+}
+
+[data-theme="dark"] .dot {
+  background: var(--yellow);
+  box-shadow: 0 0 0 2px var(--yellow);
+}
+
+.event {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.team {
+  animation: fadeUp 0.7s ease 0.4s both;
+}
+
+.teamTitle {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 28px;
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.teamCard {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  align-items: center;
+  transition: transform var(--transition-bounce), box-shadow var(--transition);
+  animation: fadeUp 0.5s ease both;
+}
+
+.teamCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.teamAvatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--cream-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brown);
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .teamAvatar {
+  background: rgba(242,201,76,0.1);
+  color: var(--yellow);
+}
+
+.teamCard h3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.teamRole {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.teamYears {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--yellow-dark);
+  margin-top: 6px;
+}
+
+[data-theme="dark"] .teamYears {
+  color: var(--yellow);
+}
+
+@media (max-width: 700px) {
+  .story {
+    grid-template-columns: 1fr;
+  }
+
+  .storyVisual {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
