@@ -83,7 +83,7 @@ export default function Home() {
             <Clock size={20} />
             <div>
               <strong>Opening Hours</strong>
-              <p>Mon-Sat: 7am - 7pm</p>
+              <p>Mon-Sat: 8am - 8pm</p>
               <p>Sunday: 8am - 4pm</p>
             </div>
           </div>
@@ -91,16 +91,18 @@ export default function Home() {
             <MapPin size={20} />
             <div>
               <strong>Location</strong>
-              <p>12 Cantonments Road</p>
-              <p>Accra, Ghana</p>
+              <p>China Mall(Ahensan)</p>
+              <p>Indece supermarket (KNUST Independence Hostel)</p>
+              <p>Jachie</p>
+              <p>Kumasi, Ghana</p>
             </div>
           </div>
           <div className={styles.infoItem}>
             <Phone size={20} />
             <div>
               <strong>Get in Touch</strong>
-              <p>+233 24 123 4567</p>
-              <p>lacreamy@gmail.com</p>
+              <p>+233 246480618</p>
+              <p>info@mblstwrt@gmail.com</p>
             </div>
           </div>
         </div>

@@ -239,6 +239,13 @@
   margin-top: 6px;
 }
 
+.avatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This keeps the image from looking stretched */
+  border-radius: 50%; /* If you want circular avatars */
+}
+
 [data-theme="dark"] .teamYears {
   color: var(--yellow);
 }

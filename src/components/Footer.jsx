@@ -11,7 +11,7 @@ export default function Footer() {
             <img src="/logo.jpg" alt="LaCreamy" className={styles.logoImg} />
             <span>LaCreamy</span>
           </div>
-          <p>Handcrafted pastries baked fresh daily in Accra, Ghana. Because you deserve the real thing.</p>
+          <p>Handcrafted pastries baked fresh daily in Kumasi, Ghana. Because you deserve the real thing.</p>
         </div>
 
         <div className={styles.links}>
@@ -26,16 +26,16 @@ export default function Footer() {
         <div className={styles.links}>
           <strong>Contact</strong>
           <span className={styles.contactItem}>
-            <MapPin size={14} /> 12 Cantonments Rd, Accra
+            <MapPin size={14} /> China Mall(Ahensan)
           </span>
           <span className={styles.contactItem}>
-            <Phone size={14} /> +233 24 123 4567
+            <Phone size={14} /> +233 246480618
           </span>
           <span className={styles.contactItem}>
-            <Mail size={14} /> lacreamy@gmail.com
+            <Mail size={14} /> info@mblstwrt@gmail.com
           </span>
           <span className={styles.contactItem}>
-            <Clock size={14} /> Mon-Sat: 7am-7pm
+            <Clock size={14} /> Mon-Sat: 8am-8pm
           </span>
         </div>
       </div>
