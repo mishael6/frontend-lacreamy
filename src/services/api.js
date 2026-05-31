@@ -5,18 +5,17 @@ const API = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
+// Attach token to every request
 API.interceptors.request.use((config) => {
-  // Use admin token for admin routes, customer token for everything else
   const isAdminRoute = config.url?.includes('/admin');
   const token = isAdminRoute
     ? localStorage.getItem('lacreamy_admin_token')
     : localStorage.getItem('lacreamy_token');
-
   if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
-// Handle 401 - auto logout
+// Handle 401
 API.interceptors.response.use(
   (res) => res,
   (error) => {
@@ -37,8 +36,10 @@ API.interceptors.response.use(
 );
 
 // Auth
-export const sendOTP = (phone) => API.post('/auth/send-otp', { phone });
-export const verifyOTP = (phone, code, name) => API.post('/auth/verify-otp', { phone, code, name });
+export const signupUser = (name, phone, password) =>
+  API.post('/auth/signup', { name, phone, password });
+export const loginUser = (phone, password) =>
+  API.post('/auth/login', { phone, password });
 export const getMe = () => API.get('/auth/me');
 export const updateProfile = (data) => API.put('/auth/profile', data);
 
@@ -51,10 +52,12 @@ export const getMyOrders = () => API.get('/orders');
 export const getMyOrder = (id) => API.get(`/orders/${id}`);
 
 // Admin
-export const adminLogin = (email, password) => API.post('/admin/login', { email, password });
+export const adminLogin = (email, password) =>
+  API.post('/admin/login', { email, password });
 export const getAdminStats = () => API.get('/admin/stats');
 export const getAllOrders = (params) => API.get('/admin/orders', { params });
-export const updateOrderStatus = (id, status, note) => API.put(`/admin/orders/${id}/status`, { status, note });
+export const updateOrderStatus = (id, status, note) =>
+  API.put(`/admin/orders/${id}/status`, { status, note });
 export const createProduct = (data) => API.post('/admin/products', data);
 export const updateProduct = (id, data) => API.put(`/admin/products/${id}`, data);
 export const deleteProduct = (id) => API.delete(`/admin/products/${id}`);

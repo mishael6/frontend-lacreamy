@@ -1,29 +1,41 @@
 import { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { sendOTP } from '../../services/api';
-import { Phone } from 'lucide-react';
+import { Phone, Lock, Eye, EyeOff } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
 import styles from './Auth.module.css';
 
 export default function Login() {
   const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
+  const { login } = useAuth();
   const from = location.state?.from || '/';
   const openCart = location.state?.openCart || false;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    const cleaned = phone.replace(/\D/g, '');
-    if (cleaned.length < 9) return setError('Please enter a valid phone number.');
     setLoading(true);
     try {
-      await sendOTP(phone);
-      navigate('/verify-otp', { state: { phone, isSignup: false, from, openCart } });
-    } catch (err) {
-      setError(err.response?.data?.message || 'Failed to send OTP. Please try again.');
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/auth/login`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone, password }),
+        }
+      );
+      const data = await res.json();
+      if (!data.success) return setError(data.message);
+      login(data.token, data.user);
+      navigate(from);
+      if (openCart) setTimeout(() => {}, 300);
+    } catch {
+      setError('Network error. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -56,14 +68,30 @@ export default function Login() {
             </div>
           </div>
 
+          <div className={styles.field}>
+            <label>Password</label>
+            <div className={styles.passwordInput}>
+              <Lock size={16} className={styles.inputIcon} />
+              <input
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Your password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                required
+              />
+              <button type="button" className={styles.eyeBtn} onClick={() => setShowPassword(s => !s)}>
+                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+              </button>
+            </div>
+          </div>
+
           {error && <div className={styles.error}>{error}</div>}
 
           <button type="submit" className={styles.submitBtn} disabled={loading}>
-            {loading ? <span className={styles.spinner} /> : 'Send OTP'}
+            {loading ? <span className={styles.spinner} /> : 'Login'}
           </button>
         </form>
 
-        <p className={styles.footnote}>We will send a 4-digit code to verify your number.</p>
         <div className={styles.divider}><span>New to LaCreamy?</span></div>
         <Link to="/signup" className={styles.secondaryLink}>Create an account</Link>
         <div className={styles.divider}><span>Admin?</span></div>

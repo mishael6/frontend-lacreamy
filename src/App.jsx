@@ -18,7 +18,6 @@ import Order from './pages/Order';
 // Auth pages
 import Signup from './pages/auth/Signup';
 import Login from './pages/auth/Login';
-import VerifyOTP from './pages/auth/VerifyOTP';
 import AdminLogin from './pages/auth/AdminLogin';
 
 // Customer Dashboard
@@ -38,23 +37,21 @@ export default function App() {
           <CartProvider>
             <BrowserRouter>
               <Routes>
-
-                {/* ── Customer Auth ── */}
+                {/* Customer Auth */}
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/verify-otp" element={<VerifyOTP />} />
 
-                {/* ── Customer Dashboard (protected) ── */}
+                {/* Customer Dashboard */}
                 <Route path="/dashboard" element={
                   <ProtectedRoute>
                     <Dashboard />
                   </ProtectedRoute>
                 } />
 
-                {/* ── Admin Auth ── */}
+                {/* Admin Auth */}
                 <Route path="/admin/login" element={<AdminLogin />} />
 
-                {/* ── Admin Panel (protected) ── */}
+                {/* Admin Panel */}
                 <Route path="/admin" element={
                   <AdminRoute>
                     <AdminLayout />
@@ -66,13 +63,12 @@ export default function App() {
                   <Route path="orders" element={<AdminOrders />} />
                 </Route>
 
-                {/* ── Public pages (navbar + footer) ── */}
+                {/* Public pages */}
                 <Route path="/" element={<><Navbar /><CartDrawer /><Home /><Footer /></>} />
                 <Route path="/menu" element={<><Navbar /><CartDrawer /><Menu /><Footer /></>} />
                 <Route path="/about" element={<><Navbar /><CartDrawer /><About /><Footer /></>} />
                 <Route path="/order" element={<><Navbar /><CartDrawer /><Order /><Footer /></>} />
                 <Route path="*" element={<Navigate to="/" replace />} />
-
               </Routes>
             </BrowserRouter>
           </CartProvider>

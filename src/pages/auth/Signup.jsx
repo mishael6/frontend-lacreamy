@@ -1,28 +1,44 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { sendOTP } from '../../services/api';
-import { User, Phone } from 'lucide-react';
+import { User, Phone, Lock, Eye, EyeOff } from 'lucide-react';
+import { useAuth } from '../../context/AuthContext';
 import styles from './Auth.module.css';
 
 export default function Signup() {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
     if (!name.trim()) return setError('Please enter your name.');
-    const cleaned = phone.replace(/\D/g, '');
-    if (cleaned.length < 9) return setError('Please enter a valid phone number.');
+    if (password.length < 6) return setError('Password must be at least 6 characters.');
+    if (password !== confirm) return setError('Passwords do not match.');
+
     setLoading(true);
     try {
-      await sendOTP(phone);
-      navigate('/verify-otp', { state: { phone, name, isSignup: true } });
-    } catch (err) {
-      setError(err.response?.data?.message || 'Failed to send OTP. Please try again.');
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/auth/signup`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, phone, password }),
+        }
+      );
+      const data = await res.json();
+      if (!data.success) return setError(data.message);
+      login(data.token, data.user);
+      navigate('/dashboard');
+    } catch {
+      setError('Network error. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -68,14 +84,44 @@ export default function Signup() {
             </div>
           </div>
 
+          <div className={styles.field}>
+            <label>Password</label>
+            <div className={styles.passwordInput}>
+              <Lock size={16} className={styles.inputIcon} />
+              <input
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Min. 6 characters"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                required
+              />
+              <button type="button" className={styles.eyeBtn} onClick={() => setShowPassword(s => !s)}>
+                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+              </button>
+            </div>
+          </div>
+
+          <div className={styles.field}>
+            <label>Confirm Password</label>
+            <div className={styles.passwordInput}>
+              <Lock size={16} className={styles.inputIcon} />
+              <input
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Repeat your password"
+                value={confirm}
+                onChange={e => setConfirm(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+
           {error && <div className={styles.error}>{error}</div>}
 
           <button type="submit" className={styles.submitBtn} disabled={loading}>
-            {loading ? <span className={styles.spinner} /> : 'Send OTP'}
+            {loading ? <span className={styles.spinner} /> : 'Create Account'}
           </button>
         </form>
 
-        <p className={styles.footnote}>We will send a 4-digit code to verify your number.</p>
         <div className={styles.divider}><span>Already have an account?</span></div>
         <Link to="/login" className={styles.secondaryLink}>Login instead</Link>
       </div>
