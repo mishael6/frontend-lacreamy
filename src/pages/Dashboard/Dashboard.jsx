@@ -2,7 +2,11 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getMyOrders } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
-import { ClipboardList, Receipt, Truck, LogOut, ShoppingBag, RefreshCw, CheckCircle, XCircle, Clock, Package, ChevronRight } from 'lucide-react';
+import {
+  ClipboardList, Receipt, Truck, LogOut, ShoppingBag,
+  RefreshCw, CheckCircle, XCircle, Package, Sun, Moon
+} from 'lucide-react';
+import { useTheme } from '../../context/ThemeContext';
 import styles from './Dashboard.module.css';
 
 const STAGES = [
@@ -35,6 +39,7 @@ function getStageIndex(status) {
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
+  const { theme, toggle } = useTheme();
   const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -45,6 +50,7 @@ export default function Dashboard() {
   useEffect(() => { fetchOrders(); }, []);
 
   const fetchOrders = async () => {
+    setLoading(true);
     try {
       const res = await getMyOrders();
       setOrders(res.data.orders || []);
@@ -57,38 +63,55 @@ export default function Dashboard() {
   };
 
   const handleLogout = () => { logout(); navigate('/login'); };
-
   const handleSelectOrder = (order) => { setSelectedOrder(order); setTab('receipt'); };
   const handleTrack = (order) => { setSelectedOrder(order); setTab('track'); };
 
   const tabs = [
-    { key: 'history', label: 'Order History', icon: ClipboardList },
+    { key: 'history', label: 'Orders', icon: ClipboardList },
     { key: 'receipt', label: 'Receipt', icon: Receipt },
-    { key: 'track', label: 'Track Order', icon: Truck },
+    { key: 'track', label: 'Track', icon: Truck },
   ];
 
   return (
     <div className={styles.page}>
+      {/* Header */}
       <div className={styles.header}>
         <div className={styles.headerInner}>
           <div className={styles.headerLeft}>
-            <img src="/logo.jpg" alt="LaCreamy" className={styles.headerLogo} />
+            <div className={styles.logoWrap}>
+              <img
+                src="/logo.jpg"
+                alt="LaCreamy"
+                className={styles.headerLogo}
+                onError={e => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+              />
+              <div className={styles.logoFallback}>LC</div>
+            </div>
             <div>
               <h1 className={styles.headerTitle}>LaCreamy</h1>
-              <p className={styles.headerSub}>Welcome back, {user?.name?.split(' ')[0] || 'Customer'}</p>
+              <p className={styles.headerSub}>
+                Welcome, {user?.name?.split(' ')[0] || 'Customer'}
+              </p>
             </div>
           </div>
+
           <div className={styles.headerRight}>
+            <button className={styles.themeBtn} onClick={toggle} aria-label="Toggle theme">
+              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
             <button className={styles.shopBtn} onClick={() => navigate('/')}>
-              <ShoppingBag size={16} /> Shop
+              <ShoppingBag size={14} />
+              <span>Shop</span>
             </button>
             <button className={styles.logoutBtn} onClick={handleLogout}>
-              <LogOut size={16} /> Logout
+              <LogOut size={14} />
+              <span>Logout</span>
             </button>
           </div>
         </div>
       </div>
 
+      {/* Tabs */}
       <div className={styles.tabsWrap}>
         <div className={styles.tabs}>
           {tabs.map(t => (
@@ -97,13 +120,14 @@ export default function Dashboard() {
               className={`${styles.tab} ${tab === t.key ? styles.activeTab : ''}`}
               onClick={() => setTab(t.key)}
             >
-              <t.icon size={16} />
-              {t.label}
+              <t.icon size={15} />
+              <span>{t.label}</span>
             </button>
           ))}
         </div>
       </div>
 
+      {/* Content */}
       <div className={styles.content}>
         {loading && (
           <div className={styles.centered}>
@@ -166,11 +190,14 @@ export default function Dashboard() {
                       <span className={styles.orderTotal}>GHC {order.total.toFixed(2)}</span>
                       <div className={styles.orderActions}>
                         <button className={styles.actionBtn} onClick={() => handleSelectOrder(order)}>
-                          <Receipt size={14} /> Receipt
+                          <Receipt size={13} /> Receipt
                         </button>
                         {order.status !== 'delivered' && order.status !== 'cancelled' && (
-                          <button className={`${styles.actionBtn} ${styles.trackBtn}`} onClick={() => handleTrack(order)}>
-                            <Truck size={14} /> Track
+                          <button
+                            className={`${styles.actionBtn} ${styles.trackBtn}`}
+                            onClick={() => handleTrack(order)}
+                          >
+                            <Truck size={13} /> Track
                           </button>
                         )}
                       </div>
@@ -184,7 +211,14 @@ export default function Dashboard() {
             {tab === 'receipt' && selectedOrder && (
               <div className={styles.receipt}>
                 <div className={styles.receiptHeader}>
-                  <img src="/logo.jpg" alt="LaCreamy" className={styles.receiptLogo} />
+                  <div className={styles.receiptLogoWrap}>
+                    <img
+                      src="/logo.jpg"
+                      alt="LaCreamy"
+                      className={styles.receiptLogo}
+                      onError={e => { e.target.style.display = 'none'; }}
+                    />
+                  </div>
                   <h2>LaCreamy</h2>
                   <p>12 Cantonments Road, Accra</p>
                   <p>+233 24 123 4567</p>
@@ -287,7 +321,10 @@ export default function Dashboard() {
                       const historyEntry = selectedOrder.deliveryHistory?.find(h => h.stage === stage.key);
 
                       return (
-                        <div key={stage.key} className={`${styles.stage} ${isDone ? styles.stageDone : ''} ${isCurrent ? styles.stageCurrent : ''}`}>
+                        <div
+                          key={stage.key}
+                          className={`${styles.stage} ${isDone ? styles.stageDone : ''} ${isCurrent ? styles.stageCurrent : ''}`}
+                        >
                           <div className={styles.stageLeft}>
                             <div className={styles.stageIconWrap}>
                               <stage.icon size={18} strokeWidth={1.5} />
@@ -312,15 +349,17 @@ export default function Dashboard() {
                   <div className={styles.orderSelector}>
                     <p>Track another order:</p>
                     <div className={styles.selectorList}>
-                      {orders.filter(o => o.status !== 'delivered' && o.status !== 'cancelled').map(o => (
-                        <button
-                          key={o._id}
-                          className={`${styles.selectorBtn} ${selectedOrder._id === o._id ? styles.selectorActive : ''}`}
-                          onClick={() => setSelectedOrder(o)}
-                        >
-                          #{o.orderNumber}
-                        </button>
-                      ))}
+                      {orders
+                        .filter(o => o.status !== 'delivered' && o.status !== 'cancelled')
+                        .map(o => (
+                          <button
+                            key={o._id}
+                            className={`${styles.selectorBtn} ${selectedOrder._id === o._id ? styles.selectorActive : ''}`}
+                            onClick={() => setSelectedOrder(o)}
+                          >
+                            #{o.orderNumber}
+                          </button>
+                        ))}
                     </div>
                   </div>
                 )}
