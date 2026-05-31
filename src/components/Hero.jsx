@@ -8,7 +8,7 @@ export default function Hero() {
       <div className={styles.content}>
         <div className={styles.badge}>
           <Star size={12} fill="currentColor" />
-          <span>Artisan Bakery - Est. 2019</span>
+          <span>Artisan Bakery - Est. 2022</span>
           <Star size={12} fill="currentColor" />
         </div>
 
