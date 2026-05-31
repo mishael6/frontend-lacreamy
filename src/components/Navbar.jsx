@@ -25,6 +25,7 @@ export default function Navbar() {
     { to: '/menu', label: 'Menu' },
     { to: '/about', label: 'Our Story' },
     { to: '/order', label: 'Order Now' },
+    { to: '/dashboard', label: 'Dashboard' },
   ];
 
   return (

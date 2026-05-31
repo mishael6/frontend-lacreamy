@@ -20,6 +20,7 @@ export default function Footer() {
           <Link to="/menu">Menu</Link>
           <Link to="/about">Our Story</Link>
           <Link to="/order">Order Now</Link>
+          <Link to="/dashboard">Dashboard</Link>
         </div>
 
         <div className={styles.links}>
