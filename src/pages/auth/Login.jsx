@@ -94,8 +94,8 @@ export default function Login() {
 
         <div className={styles.divider}><span>New to LaCreamy?</span></div>
         <Link to="/signup" className={styles.secondaryLink}>Create an account</Link>
-        <div className={styles.divider}><span>Admin?</span></div>
-        <Link to="/admin/login" className={styles.adminLink}>Go to Admin Login</Link>
+        {/* ... <div className={styles.divider}><span>Admin?</span></div>
+        <Link to="/admin/login" className={styles.adminLink}>Go to Admin Login</Link> ... */}
       </div>
     </div>
   );
