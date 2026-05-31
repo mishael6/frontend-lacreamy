@@ -125,4 +125,4 @@ export const pastries = [
   },
 ];
 
-export const ADMIN_WHATSAPP = '233502076920'; // Replace with real number
+export const ADMIN_WHATSAPP = '0532646676'; // Replace with real number
