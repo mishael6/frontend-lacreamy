@@ -1,28 +1,35 @@
 .nav {
-  position: fixed;
+  position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
+  left: 50%;
+  right: auto;
   z-index: 100;
-  height: var(--nav-height);
+  width: 100%;
+  height: 68px;
+  transform: translateX(-50%);
+  background: #F9F8F5;
   transition: background-color var(--transition), backdrop-filter var(--transition), box-shadow var(--transition);
 }
 
 .nav.scrolled {
-  background-color: rgba(253, 246, 227, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: var(--shadow-sm);
+  background: #F9F8F5;
+  box-shadow: none;
 }
 
+.homeNav { max-width: none; background: #F9F8F5; box-shadow: none; }
+.homeNav.scrolled { background: #F9F8F5; box-shadow: none; }
+.aboutNav { background: rgba(249, 248, 245, .78); backdrop-filter: blur(14px); }
+.aboutNav.scrolled { background: rgba(249, 248, 245, .93); box-shadow: 0 1px 18px rgba(7, 4, 3, .08); }
+
 [data-theme="dark"] .nav.scrolled {
-  background-color: rgba(26, 13, 5, 0.88);
+  background-color: rgba(7, 4, 3, 0.88);
 }
 
 .inner {
-  max-width: 1200px;
+  position: relative;
+  max-width: none;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 clamp(30px, 8.4vw, 150px);
   height: 100%;
   display: flex;
   align-items: center;
@@ -32,9 +39,9 @@
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   font-weight: 700;
   color: var(--text-primary);
   transition: opacity var(--transition);
@@ -46,11 +53,13 @@
 }
 
 .logoImg {
-  width: 36px;
-  height: 36px;
+  width: 58px;
+  height: 58px;
   object-fit: contain;
-  border-radius: 6px;
+  mix-blend-mode: multiply;
 }
+
+.logoText { letter-spacing: -.055em; }
 
 .logoText {
   background: linear-gradient(135deg, var(--brown) 0%, var(--yellow-dark) 100%);
@@ -69,14 +78,18 @@
 .links {
   display: flex;
   align-items: center;
-  gap: 8px;
-  flex: 1;
+  justify-content: center;
+  gap: 17px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
 }
 
 .link {
-  padding: 8px 16px;
+  padding: 8px 13px;
   border-radius: var(--radius-full);
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   font-weight: 500;
   color: var(--text-secondary);
   transition: color var(--transition), background-color var(--transition);
@@ -88,20 +101,15 @@
 }
 
 .link.active {
-  color: var(--brown);
-  background-color: var(--cream-deep);
-  font-weight: 600;
-}
-
-[data-theme="dark"] .link.active {
-  color: var(--yellow);
-  background-color: rgba(242, 201, 76, 0.12);
+  color: #070403;
+  background-color: transparent;
+  font-weight: 500;
 }
 
 .actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
   margin-left: auto;
 }
 
@@ -116,6 +124,26 @@
   transition: color var(--transition), background-color var(--transition);
 }
 
+.accountLink {
+  width: auto;
+  min-width: 40px;
+  height: 48px;
+  padding: 4px 6px;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.accountName {
+  max-width: 92px;
+  overflow: hidden;
+  color: inherit;
+  font-size: 0.62rem;
+  font-weight: 500;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .iconBtn:hover {
   color: var(--text-primary);
   background-color: var(--bg-overlay);
@@ -128,14 +156,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--white);
-  background: var(--cta);
+  color: #070403;
+  background: transparent;
   position: relative;
   transition: background-color var(--transition), transform var(--transition-bounce);
 }
 
+.orderLink { color: #F9F8F5; background: #070403; border-radius: 3px; padding: 12px 17px; margin-left: 4px; font-size: .79rem; font-weight: 600; transition: background .2s; white-space: nowrap; }
+.orderLink:hover { background: #61311D; }
+.hamburger { display: none; }
+
 .cartBtn:hover {
-  background: var(--cta-hover);
+  background: rgba(7, 4, 3, .06);
   transform: scale(1.05);
 }
 
@@ -194,11 +226,26 @@
     display: none;
   }
 
-  #hamburger {
-    display: flex !important;
-  }
+  .hamburger { display: flex; }
+
+  .inner { gap: 12px; padding: 0 20px; }
+  .actions { gap: 2px; }
+  .orderLink { display: none; }
 
   .links.open {
     display: none;
   }
 }
+
+@media (max-width: 620px) {
+  .homeNav { top: 0; width: 100%; }
+  .inner { padding: 0 20px; }
+  .logoImg { width: 50px; height: 50px; }
+  .accountName { max-width: 72px; }
+}
+
+.homeNav .link, .homeNav .iconBtn, .homeNav .cartBtn { color: #070403; background-color: transparent; }
+.homeNav .cartBtn { width: 40px; height: 40px; }
+.homeNav .link.active { color: #070403; font-weight: 500; }
+.homeNav .badge { background: #070403; color: #FFFFFF; border-color: #F9F8F5; }
+.homeNav .mobileMenu { background: #F9F8F5; color: #070403; }

@@ -33,19 +33,6 @@ export function AdminAuthProvider({ children }) {
     setAdmin(null);
   }, []);
 
-  if (loading) {
-    return (
-      <div style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-        <span style={{ fontSize: '3rem' }}>🥐</span>
-      </div>
-    );
-  }
-
   return (
     <AdminAuthContext.Provider value={{ admin, loading, loginAdmin, logoutAdmin }}>
       {children}

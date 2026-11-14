@@ -25,7 +25,7 @@
 
 [data-theme="dark"] .dropzone:hover {
   border-color: var(--yellow);
-  background: rgba(242, 201, 76, 0.06);
+  background: rgba(186, 145, 98, 0.06);
 }
 
 .dropzone.dragging {
@@ -37,7 +37,7 @@
 
 [data-theme="dark"] .dropzone.dragging {
   border-color: var(--yellow);
-  background: rgba(242, 201, 76, 0.08);
+  background: rgba(186, 145, 98, 0.08);
 }
 
 .dropzone.uploading {
@@ -55,9 +55,11 @@
 }
 
 .dropIcon {
-  font-size: 2.5rem;
+  color: var(--yellow-dark);
   margin-bottom: 4px;
 }
+
+.error { display: flex; align-items: center; gap: 7px; }
 
 .dropTitle {
   font-size: 0.95rem;
@@ -141,7 +143,7 @@
 .previewOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(7, 4, 3, 0.55);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -172,7 +174,7 @@
 .removeBtn {
   padding: 8px 16px;
   border-radius: var(--radius-full);
-  background: rgba(239, 68, 68, 0.9);
+  background: rgba(97, 49, 29, 0.9);
   color: white;
   font-size: 0.82rem;
   font-weight: 700;
@@ -180,22 +182,22 @@
 }
 
 .removeBtn:hover {
-  background: #dc2626;
+  background: #61311D;
   transform: scale(1.04);
 }
 
 /* Error */
 .error {
   font-size: 0.82rem;
-  color: #dc2626;
+  color: #61311D;
   padding: 8px 12px;
-  background: #fef2f2;
+  background: #F9F8F5;
   border-radius: var(--radius-sm);
-  border: 1px solid #fecaca;
+  border: 1px solid #B2ACA4;
 }
 
 [data-theme="dark"] .error {
-  background: rgba(220, 38, 38, 0.1);
-  border-color: rgba(220, 38, 38, 0.3);
-  color: #f87171;
+  background: rgba(249, 248, 245, 0.1);
+  border-color: rgba(178, 172, 164, 0.3);
+  color: #B2ACA4;
 }

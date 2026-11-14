@@ -1,7 +1,7 @@
 .backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(7,4,3,0.5);
   z-index: 200;
   animation: fadeIn 0.2s ease;
 }
@@ -86,7 +86,7 @@
 .successMsg p {
   font-family: var(--font-display);
   font-size: 1.1rem;
-  color: #22c55e;
+  color: #BA9162;
   font-weight: 600;
 }
 
@@ -148,7 +148,7 @@
   justify-content: center;
   flex-shrink: 0;
   overflow: hidden;
-  color: rgba(107,63,31,0.4);
+  color: rgba(97,49,29,0.4);
 }
 
 .itemVisual img {
@@ -225,8 +225,8 @@
 }
 
 .removeBtn:hover {
-  color: #dc2626;
-  background: #fee2e2;
+  color: #61311D;
+  background: #F9F8F5;
 }
 
 /* Details */
@@ -304,7 +304,7 @@
 .field input:focus,
 .field textarea:focus {
   border-color: var(--yellow-dark);
-  box-shadow: 0 0 0 3px rgba(242,201,76,0.2);
+  box-shadow: 0 0 0 3px rgba(186,145,98,0.18);
 }
 
 .summary {
@@ -355,6 +355,12 @@
   color: var(--text-primary);
 }
 
+.checkoutNote {
+  margin: -4px 0 0;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+}
+
 /* Login prompt */
 .loginPrompt {
   display: flex;
@@ -396,6 +402,10 @@
 /* Proceed btn */
 .proceedBtn {
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
   padding: 14px;
   border-radius: var(--radius-full);
   background: var(--cta);
@@ -445,14 +455,14 @@
   gap: 8px;
   padding: 14px;
   border-radius: var(--radius-full);
-  background: #25D366;
-  color: white;
+  background: #070403;
+  color: #F9F8F5;
   font-weight: 700;
   font-size: 0.9rem;
   transition: background-color var(--transition), transform var(--transition-bounce);
 }
 
 .whatsappBtn:hover {
-  background: #128C7E;
+  background: #61311D;
   transform: scale(1.02);
 }

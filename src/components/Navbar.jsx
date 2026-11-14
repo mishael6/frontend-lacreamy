@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { ShoppingBag, Moon, Sun, Menu, X } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
+import { usePathname } from 'next/navigation';
+import Image from 'next/image';
+import { Link } from '../navigation';
+import { ShoppingBag, Menu, X, Search, UserRound } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
-  const { theme, toggle } = useTheme();
   const { count, setIsOpen } = useCart();
+  const { user } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const location = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -18,22 +20,25 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
-  useEffect(() => { setMenuOpen(false); }, [location]);
+  useEffect(() => {
+    setMenuOpen(false);
+    document.body.setAttribute('data-page', pathname === '/' ? 'home' : 'store');
+    document.body.setAttribute('data-route', pathname);
+  }, [pathname]);
 
   const links = [
     { to: '/', label: 'Home' },
-    { to: '/menu', label: 'Menu' },
-    { to: '/about', label: 'Our Story' },
-    { to: '/order', label: 'Order Now' },
-    { to: '/dashboard', label: 'Dashboard' },
+    { to: '/about', label: 'About us' },
+    { to: '/menu', label: 'Products' },
+    { to: '/order', label: 'Order' },
+    { to: '/contact', label: 'Contact us' },
   ];
 
   return (
-    <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
+    <nav className={`${styles.nav} ${pathname === '/' ? styles.homeNav : ''} ${pathname === '/about' ? styles.aboutNav : ''} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.inner}>
-        <Link to="/" className={styles.logo}>
-          <img src="/logo.jpg" alt="LaCreamy" className={styles.logoImg} />
-          <span className={styles.logoText}>LaCreamy</span>
+        <Link to="/" aria-label="LaCreamy home" className={styles.logo}>
+          <Image src="/logo.jpg" width={640} height={640} alt="LaCreamy Cakes" className={styles.logoImg} priority />
         </Link>
 
         <div className={`${styles.links} ${menuOpen ? styles.open : ''}`}>
@@ -41,7 +46,7 @@ export default function Navbar() {
             <Link
               key={l.to}
               to={l.to}
-              className={`${styles.link} ${location.pathname === l.to ? styles.active : ''}`}
+              className={`${styles.link} ${pathname === l.to ? styles.active : ''}`}
             >
               {l.label}
             </Link>
@@ -49,14 +54,22 @@ export default function Navbar() {
         </div>
 
         <div className={styles.actions}>
-          <button className={styles.iconBtn} onClick={toggle} aria-label="Toggle theme">
-            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
+          <Link to="/menu" className={styles.iconBtn} aria-label="Browse and search products"><Search size={17} /></Link>
 
           <button className={styles.cartBtn} onClick={() => setIsOpen(true)} aria-label="Open cart">
             <ShoppingBag size={20} />
             {count > 0 && <span className={styles.badge}>{count}</span>}
           </button>
+
+          <Link
+            to={user ? '/dashboard' : '/login'}
+            className={`${styles.iconBtn} ${styles.accountLink}`}
+            aria-label={user ? `${user.name}'s account dashboard` : 'Sign in to your account'}
+            title={user?.name || 'Customer account'}
+          >
+            <UserRound size={17} />
+            {user?.name && <span className={styles.accountName}>{user.name}</span>}
+          </Link>
 
           <button
             className={`${styles.iconBtn} ${styles.hamburger}`}
@@ -70,7 +83,7 @@ export default function Navbar() {
 
       {menuOpen && (
         <div className={styles.mobileMenu}>
-          {links.map(l => (
+            {links.map(l => (
             <Link key={l.to} to={l.to} className={styles.mobileLink}>
               {l.label}
             </Link>

@@ -16,8 +16,7 @@ export const pastries = [
     price: 8.50,
     description: 'Seventy-two layers of hand-laminated dough with French butter, baked until deeply golden with a shatteringly crisp exterior.',
     badge: 'Bestseller',
-    emoji: '🥐',
-    gradient: 'linear-gradient(135deg, #F5E9C8 0%, #E8CC8A 100%)',
+    gradient: 'linear-gradient(135deg, #F9F8F5 0%, #FDCFAA 100%)',
   },
   {
     id: 2,
@@ -26,8 +25,7 @@ export const pastries = [
     price: 11.00,
     description: 'Double-baked with house-made almond cream, finished with toasted flaked almonds and a dusting of powdered sugar.',
     badge: 'Fan Favourite',
-    emoji: '🥐',
-    gradient: 'linear-gradient(135deg, #FAEEDA 0%, #D4A017 100%)',
+    gradient: 'linear-gradient(135deg, #F9F8F5 0%, #FDCFAA 100%)',
   },
   {
     id: 3,
@@ -35,8 +33,7 @@ export const pastries = [
     category: 'croissants',
     price: 9.50,
     description: 'Buttery laminated dough twisted around rich 70% dark chocolate batons, baked to glossy, caramelised perfection.',
-    emoji: '🍫',
-    gradient: 'linear-gradient(135deg, #C8A882 0%, #6B3F1F 100%)',
+    gradient: 'linear-gradient(135deg, #F9F8F5 0%, #FDCFAA 100%)',
   },
   {
     id: 4,
@@ -45,8 +42,7 @@ export const pastries = [
     price: 45.00,
     description: 'Light vanilla génoise layered with fresh strawberry compote and whipped crème diplomate, draped in a mirror glaze.',
     badge: 'Seasonal',
-    emoji: '🍓',
-    gradient: 'linear-gradient(135deg, #FFE0E6 0%, #FFB3C1 100%)',
+    gradient: 'linear-gradient(135deg, #F9F8F5 0%, #FDCFAA 100%)',
   },
   {
     id: 5,
@@ -55,8 +51,7 @@ export const pastries = [
     price: 52.00,
     description: 'Eight alternating layers of espresso-soaked joconde, salted caramel buttercream and dark chocolate ganache.',
     badge: 'Chef\'s Special',
-    emoji: '🎂',
-    gradient: 'linear-gradient(135deg, #D4A017 0%, #6B3F1F 100%)',
+    gradient: 'linear-gradient(135deg, #F9F8F5 0%, #FDCFAA 100%)',
   },
   {
     id: 6,
@@ -64,8 +59,7 @@ export const pastries = [
     category: 'tarts',
     price: 28.00,
     description: 'Crisp pâte sucrée shell filled with silky lemon verbena curd, topped with Italian meringue torched tableside.',
-    emoji: '🍋',
-    gradient: 'linear-gradient(135deg, #FFFDE7 0%, #F9E04B 100%)',
+    gradient: 'linear-gradient(135deg, #F9F8F5 0%, #FDCFAA 100%)',
   },
   {
     id: 7,
@@ -73,8 +67,7 @@ export const pastries = [
     category: 'tarts',
     price: 24.00,
     description: 'Rustic free-form tart with buttery rough-puff pastry, almond cream base and a tumble of seasonal wild berries.',
-    emoji: '🫐',
-    gradient: 'linear-gradient(135deg, #E8D5F5 0%, #9B59B6 80%)',
+    gradient: 'linear-gradient(135deg, #F9F8F5 0%, #FDCFAA 100%)',
   },
   {
     id: 8,
@@ -83,8 +76,7 @@ export const pastries = [
     price: 5.50,
     description: 'Nutty brown butter dough studded with Valrhona 64% discs, finished with fleur de sel. Crisp edge, gooey centre.',
     badge: 'Bestseller',
-    emoji: '🍪',
-    gradient: 'linear-gradient(135deg, #F5DEB3 0%, #8B4513 100%)',
+    gradient: 'linear-gradient(135deg, #F9F8F5 0%, #FDCFAA 100%)',
   },
   {
     id: 9,
@@ -92,8 +84,7 @@ export const pastries = [
     category: 'cookies',
     price: 6.00,
     description: 'Ceremonial-grade matcha dough with creamy white chocolate pockets and a satisfying chewy texture throughout.',
-    emoji: '🍵',
-    gradient: 'linear-gradient(135deg, #D4EDDA 0%, #28A745 100%)',
+    gradient: 'linear-gradient(135deg, #F9F8F5 0%, #FDCFAA 100%)',
   },
   {
     id: 10,
@@ -101,8 +92,7 @@ export const pastries = [
     category: 'bread',
     price: 18.00,
     description: '72-hour cold-fermented sourdough with open crumb, mahogany crust and complex wheaty depth. Made with heritage grain.',
-    emoji: '🍞',
-    gradient: 'linear-gradient(135deg, #FAEBD7 0%, #8B6914 100%)',
+    gradient: 'linear-gradient(135deg, #F9F8F5 0%, #FDCFAA 100%)',
   },
   {
     id: 11,
@@ -110,8 +100,7 @@ export const pastries = [
     category: 'bread',
     price: 14.00,
     description: 'Pillowy Roman-style focaccia dimpled with extra-virgin olive oil, flaked sea salt and fragrant fresh rosemary.',
-    emoji: '🌿',
-    gradient: 'linear-gradient(135deg, #E8F5E9 0%, #66BB6A 100%)',
+    gradient: 'linear-gradient(135deg, #F9F8F5 0%, #FDCFAA 100%)',
   },
   {
     id: 12,
@@ -120,9 +109,8 @@ export const pastries = [
     price: 32.00,
     description: 'A bold seasonal creation — Alfonso mango curd kissed with a whisper of bird\'s eye chilli in a toasted coconut shell.',
     badge: 'Limited',
-    emoji: '🥭',
-    gradient: 'linear-gradient(135deg, #FFE0B2 0%, #FF6F00 100%)',
+    gradient: 'linear-gradient(135deg, #F9F8F5 0%, #FDCFAA 100%)',
   },
 ];
 
-export const ADMIN_WHATSAPP = '0532646676'; // Replace with real number
+export const ADMIN_WHATSAPP = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '233532646676';

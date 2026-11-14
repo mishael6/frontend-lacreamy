@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { Camera, Trash2, ImagePlus, AlertCircle } from 'lucide-react';
 import styles from './ImageUpload.module.css';
 
 export default function ImageUpload({ value, onChange }) {
@@ -8,8 +9,8 @@ export default function ImageUpload({ value, onChange }) {
   const [progress, setProgress] = useState(0);
   const inputRef = useRef();
 
-  const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
-  const UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+  const CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+  const UPLOAD_PRESET = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
 
   const uploadToCloudinary = async (file) => {
     // Validate file
@@ -96,14 +97,14 @@ export default function ImageUpload({ value, onChange }) {
               className={styles.changeBtn}
               onClick={() => inputRef.current?.click()}
             >
-              📷 Change Image
+              <Camera size={15} aria-hidden="true" /> Change Image
             </button>
             <button
               type="button"
               className={styles.removeBtn}
               onClick={handleRemove}
             >
-              🗑️ Remove
+              <Trash2 size={15} aria-hidden="true" /> Remove
             </button>
           </div>
           <input
@@ -152,7 +153,7 @@ export default function ImageUpload({ value, onChange }) {
             </div>
           ) : (
             <div className={styles.dropContent}>
-              <span className={styles.dropIcon}>📸</span>
+              <ImagePlus className={styles.dropIcon} size={36} strokeWidth={1.4} aria-hidden="true" />
               <p className={styles.dropTitle}>
                 {dragging ? 'Drop image here!' : 'Upload Product Image'}
               </p>
@@ -165,7 +166,7 @@ export default function ImageUpload({ value, onChange }) {
         </div>
       )}
 
-      {error && <p className={styles.error}>❌ {error}</p>}
+      {error && <p className={styles.error}><AlertCircle size={15} aria-hidden="true" /> {error}</p>}
     </div>
   );
 }

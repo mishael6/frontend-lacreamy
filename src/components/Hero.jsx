@@ -1,77 +1,30 @@
-import { Link } from 'react-router-dom';
-import { ArrowRight, Star, Award, Clock, Package } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import styles from './Hero.module.css';
 
 export default function Hero() {
   return (
     <section className={styles.hero}>
-      <div className={styles.content}>
-        <div className={styles.badge}>
-          <Star size={12} fill="currentColor" />
-          <span>Artisan Bakery - Est. 2022</span>
-          <Star size={12} fill="currentColor" />
-        </div>
-
-        <h1 className={styles.headline}>
-          <span className={styles.line1}>Crafted with</span>
-          <span className={styles.line2}>Love and Butter</span>
-        </h1>
-
-        <p className={styles.sub}>
-          Every pastry is hand-made daily with locally sourced ingredients,
-          French techniques, and an obsessive attention to flavour.
-        </p>
-
-        <div className={styles.actions}>
-          <Link to="/menu" className={styles.primaryBtn}>
-            Browse the Menu
-            <ArrowRight size={18} />
-          </Link>
-          <Link to="/order" className={styles.secondaryBtn}>
-            Order Now
-          </Link>
-        </div>
-
-        <div className={styles.stats}>
-          <div className={styles.stat}>
-            <span className={styles.statNum}>50+</span>
-            <span className={styles.statLabel}>Pastry Varieties</span>
-          </div>
-          <div className={styles.divider} />
-          <div className={styles.stat}>
-            <span className={styles.statNum}>Daily</span>
-            <span className={styles.statLabel}>Fresh Baked</span>
-          </div>
-          <div className={styles.divider} />
-          <div className={styles.stat}>
-            <span className={styles.statNum}>5 Star</span>
-            <span className={styles.statLabel}>Rated by Customers</span>
-          </div>
+      <div className={styles.copy}>
+        <div className={styles.copyEnter}>
+          <h1>Your Daily Dose<br />of Freshness</h1>
+          <p className={styles.intro}>Premium bread and cookies<br />made from scratch</p>
+          <a className={styles.roundLink} href="#bestsellers" aria-label="Shop now, see bestsellers">
+            <svg className={styles.roundText} viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+              <defs>
+                <path id="shopNowCircle" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" />
+              </defs>
+              <text>
+                <textPath href="#shopNowCircle">SHOP NOW · SHOP NOW · SHOP NOW ·</textPath>
+              </text>
+            </svg>
+            <i><ArrowUpRight size={23} strokeWidth={1.6} /></i>
+          </a>
         </div>
       </div>
-
-      <div className={styles.visual} aria-hidden="true">
-        <div className={styles.ringOuter}>
-          <div className={styles.ringInner}>
-            <div className={styles.centerPiece}>
-              <Award size={64} strokeWidth={1} className={styles.centerIcon} />
-            </div>
-          </div>
-        </div>
-        <div className={styles.orbitItems}>
-          {[Package, Star, Clock].map((Icon, i) => (
-            <div
-              key={i}
-              className={styles.orbitItem}
-              style={{
-                transform: `rotate(${i * 120}deg) translateX(140px) rotate(-${i * 120}deg)`,
-              }}
-            >
-              <Icon size={22} strokeWidth={1.5} />
-            </div>
-          ))}
-        </div>
+      <div className={styles.visual}>
+        <img className={styles.mainPhoto} src="/cakes-hero.png" alt="Golden waffles topped with strawberries, cream, and chocolate" />
       </div>
+      <img className={styles.chocolateDrip} src="/chocolate-drip.png" alt="" aria-hidden="true" />
     </section>
   );
 }

@@ -1,0 +1,70 @@
+.layout {
+  min-height: 100vh;
+  background: #f6f5f2;
+  color: #171512;
+}
+
+.sidebar {
+  position: fixed;
+  z-index: 100;
+  inset: 0 auto 0 0;
+  width: 258px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-right: 1px solid #e9e6e1;
+  transition: transform 220ms ease;
+}
+
+.sidebarHeader { padding: 25px 22px 21px; border-bottom: 1px solid #f0eeeb; }
+.brand { display: flex; align-items: center; gap: 12px; color: inherit; text-decoration: none; }
+.brandLogo { width: 42px; height: 42px; border-radius: 12px; object-fit: cover; }
+.brand > span { display: flex; flex-direction: column; gap: 4px; }
+.sidebarTitle { color: #171512; font-size: 0.98rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+.sidebarSub { color: #8c8881; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+.nav { flex: 1; padding: 24px 13px; display: flex; flex-direction: column; gap: 5px; }
+.navLabel { margin: 0 11px 8px; color: #a29d96; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; }
+.navItem { min-height: 44px; display: flex; align-items: center; gap: 12px; padding: 0 12px; border-radius: 8px; color: #68645e; font-size: 0.79rem; font-weight: 500; text-decoration: none; transition: background 160ms ease, color 160ms ease; }
+.navItem:hover { background: #f7f5f2; color: #171512; }
+.navActive { background: #f3ede5; color: #61311d; font-weight: 650; }
+.navActive:hover { background: #f3ede5; color: #61311d; }
+.navActive::before { width: 3px; height: 22px; margin-left: -12px; border-radius: 0 3px 3px 0; background: #9e633a; content: ''; }
+.storefrontLink { margin-top: 13px; border-top: 1px solid #f0eeeb; border-radius: 0; padding-top: 14px; color: #8c8881; }
+
+.sidebarFooter { padding: 16px; border-top: 1px solid #f0eeeb; display: flex; flex-direction: column; gap: 14px; }
+.adminInfo { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.adminAvatar,.topbarAvatar { display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; background: #171512; color: #fff; font-size: 0.75rem; font-weight: 700; }
+.adminAvatar { width: 36px; height: 36px; }
+.adminInfo > div:last-child { min-width: 0; }
+.adminName { margin: 0; overflow: hidden; color: #282520; font-size: 0.74rem; font-weight: 650; text-overflow: ellipsis; white-space: nowrap; }
+.adminEmail { margin: 4px 0 0; overflow: hidden; color: #8c8881; font-size: 0.65rem; text-overflow: ellipsis; white-space: nowrap; }
+.footerActions { display: flex; }
+.logoutBtn { width: 100%; min-height: 38px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid #e9e6e1; border-radius: 6px; color: #625d56; font-size: 0.73rem; font-weight: 600; transition: border-color 160ms ease, color 160ms ease, background 160ms ease; }
+.logoutBtn:hover { border-color: #d8c7b7; background: #fbf8f5; color: #61311d; }
+
+.main { min-height: 100vh; margin-left: 258px; display: flex; flex-direction: column; }
+.topbar { position: sticky; top: 0; z-index: 50; min-height: 72px; display: flex; align-items: center; gap: 16px; padding: 0 clamp(22px, 4vw, 48px); border-bottom: 1px solid #e9e6e1; background: rgba(255,255,255,.94); backdrop-filter: blur(12px); }
+.menuBtn { display: none; width: 36px; height: 36px; place-items: center; border-radius: 6px; color: #625d56; }
+.menuBtn:hover { background: #f7f5f2; }
+.topbarHeading { display: flex; flex-direction: column; gap: 3px; }
+.topbarHeading span { color: #969189; font-size: 0.63rem; letter-spacing: 0.05em; }
+.topbarHeading strong { color: #25221e; font-size: 0.85rem; font-weight: 650; }
+.topbarUser { display: flex; align-items: center; gap: 9px; margin-left: auto; color: #68645e; font-size: 0.72rem; font-weight: 550; }
+.topbarAvatar { width: 30px; height: 30px; background: #f3ede5; color: #61311d; }
+.pageContent { width: 100%; max-width: 1560px; flex: 1; margin: 0 auto; padding: 34px clamp(22px, 4vw, 48px) 54px; }
+.overlay { position: fixed; inset: 0; z-index: 90; background: rgba(23,21,18,.38); }
+
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); box-shadow: 15px 0 35px rgba(23,21,18,.08); }
+  .sidebar.sidebarOpen { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .menuBtn { display: grid; }
+  .topbar { min-height: 64px; }
+}
+
+@media (max-width: 520px) {
+  .topbar { gap: 11px; padding: 0 15px; }
+  .topbarUser > span:last-child { display: none; }
+  .pageContent { padding: 24px 15px 38px; }
+}
